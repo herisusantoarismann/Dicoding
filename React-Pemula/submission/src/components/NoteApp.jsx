@@ -101,7 +101,7 @@ class NoteApp extends React.Component {
                 ))}
             </div>
           ) : (
-            <NoteEmptyMessage />
+            <NoteEmptyMessage name="Catatan" />
           )}
           <h2>Arsip</h2>
           {this.state.data.filter((item) => item.archived).length > 0 ? (
@@ -125,7 +125,7 @@ class NoteApp extends React.Component {
                 ))}
             </div>
           ) : (
-            <NoteEmptyMessage />
+            <NoteEmptyMessage name="Arsip" />
           )}
         </main>
       </div>
