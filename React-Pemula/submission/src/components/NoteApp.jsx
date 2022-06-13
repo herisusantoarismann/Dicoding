@@ -7,7 +7,7 @@ class NoteApp extends React.Component {
     this.state = {
       data: getInitialData(),
       title: "",
-      note: "",
+      body: "",
       maxLengthTitle: 50,
       archived: [],
     };
@@ -27,7 +27,21 @@ class NoteApp extends React.Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
+
+    const newData = {
+      id: +new Date(),
+      title: this.state.title,
+      body: this.state.body,
+      createdAt: new Date(),
+      archived: false,
+    };
+
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        data: [...prevState.data, newData],
+      };
+    });
   };
 
   onDelete = (id) => {
@@ -64,12 +78,12 @@ class NoteApp extends React.Component {
                 type="text"
                 placeholder="Masukkan Judul"
                 name="title"
-                value={this.title}
+                value={this.state.title}
                 onChange={this.onChange}
               />
               <textarea
-                name="note"
-                value={this.note}
+                name="body"
+                value={this.state.body}
                 cols="30"
                 rows="10"
                 placeholder="Masukkan Catatan...."
