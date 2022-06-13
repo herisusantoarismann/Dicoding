@@ -1,9 +1,9 @@
 import React from "react";
 import { getInitialData } from "../utils/index";
 import { NoteEmptyMessage } from "./NoteEmptyMessage";
+import { NoteHeader } from "./NoteHeader";
 import { NoteInput } from "./NoteInput";
 import { NoteItem } from "./NoteItem";
-import { NoteSearch } from "./NoteSearch";
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -71,10 +71,7 @@ class NoteApp extends React.Component {
   render() {
     return (
       <div>
-        <header className="note-app__header">
-          <h1>Note App</h1>
-          <NoteSearch keyword={this.state.keyword} onChange={this.onChange} />
-        </header>
+        <NoteHeader keyword={this.state.keyword} onChange={this.onChange} />
         <main className="note-app__body">
           <NoteInput
             title={this.state.title}
