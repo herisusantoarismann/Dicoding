@@ -3,6 +3,7 @@ import { getInitialData } from "../utils/index";
 import { NoteEmptyMessage } from "./NoteEmptyMessage";
 import { NoteInput } from "./NoteInput";
 import { NoteItem } from "./NoteItem";
+import { NoteSearch } from "./NoteSearch";
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -72,15 +73,7 @@ class NoteApp extends React.Component {
       <div>
         <header className="note-app__header">
           <h1>Note App</h1>
-          <div>
-            <input
-              type="text"
-              name="keyword"
-              value={this.state.keyword}
-              placeholder="Search your note"
-              onChange={this.onChange}
-            />
-          </div>
+          <NoteSearch keyword={this.state.keyword} onChange={this.onChange} />
         </header>
         <main className="note-app__body">
           <NoteInput
