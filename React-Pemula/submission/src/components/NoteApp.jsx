@@ -1,6 +1,8 @@
 import React from "react";
-import { getInitialData, showFormattedDate } from "../utils/index";
+import { getInitialData } from "../utils/index";
+import { NoteEmptyMessage } from "./NoteEmptyMessage";
 import { NoteInput } from "./NoteInput";
+import { NoteItem } from "./NoteItem";
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -94,38 +96,16 @@ class NoteApp extends React.Component {
                   (item) =>
                     !item.archived && item.title.includes(this.state.keyword)
                 )
-                .map((item) => {
-                  return (
-                    <div className="note-item" key={item.id}>
-                      <div className="note-item__content">
-                        <h3 className="note-item__title">{item.title}</h3>
-                        <p className="note-item__date">
-                          {showFormattedDate(item.createdAt)}
-                        </p>
-                        <p className="note-item__body">{item.body}</p>
-                      </div>
-                      <div className="note-item__action">
-                        <button
-                          className="note-item__delete-button"
-                          onClick={() => this.onDelete(item.id)}
-                        >
-                          Delete
-                        </button>
-                        <button
-                          className="note-item__archive-button"
-                          onClick={() => this.onArchived(item.id, true)}
-                        >
-                          Arsipkan
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
+                .map((item) => (
+                  <NoteItem
+                    onDelete={this.onDelete}
+                    onArchived={this.onArchived}
+                    {...item}
+                  />
+                ))}
             </div>
           ) : (
-            <div className="notes-list__empty-message">
-              <h3>Tidak ada Catatan</h3>
-            </div>
+            <NoteEmptyMessage />
           )}
           <h2>Arsip</h2>
           {this.state.data.filter((item) => item.archived).length > 0 ? (
@@ -135,38 +115,16 @@ class NoteApp extends React.Component {
                   (item) =>
                     item.archived && item.title.includes(this.state.keyword)
                 )
-                .map((item) => {
-                  return (
-                    <div className="note-item" key={item.id}>
-                      <div className="note-item__content">
-                        <h3 className="note-item__title">{item.title}</h3>
-                        <p className="note-item__date">
-                          {showFormattedDate(item.createdAt)}
-                        </p>
-                        <p className="note-item__body">{item.body}</p>
-                      </div>
-                      <div className="note-item__action">
-                        <button
-                          className="note-item__delete-button"
-                          onClick={() => this.onDelete(item.id)}
-                        >
-                          Delete
-                        </button>
-                        <button
-                          className="note-item__archive-button"
-                          onClick={() => this.onArchived(item.id, false)}
-                        >
-                          Arsipkan
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
+                .map((item) => (
+                  <NoteItem
+                    onDelete={this.onDelete}
+                    onArchived={this.onArchived}
+                    {...item}
+                  />
+                ))}
             </div>
           ) : (
-            <div className="notes-list__empty-message">
-              <h3>Tidak ada Arsip</h3>
-            </div>
+            <NoteEmptyMessage />
           )}
         </main>
       </div>
