@@ -24,6 +24,7 @@ class NoteApp extends React.Component {
   onChange = (event) => {
     this.setState(() => {
       return {
+        // get dynamic name and value
         [event.target.name]: event.target.value,
       };
     });
@@ -52,6 +53,7 @@ class NoteApp extends React.Component {
     this.setState((prevState) => {
       return {
         ...prevState,
+        // filter data by id
         data: prevState.data.filter((item) => item.id !== id),
       };
     });
@@ -61,6 +63,7 @@ class NoteApp extends React.Component {
     this.setState((prevState) => {
       return {
         ...prevState,
+        // filer and change value data
         data: this.state.data.map((item) =>
           item.id === id ? { ...item, archived: archived } : item
         ),
@@ -105,6 +108,7 @@ class NoteApp extends React.Component {
             <NoteEmptyMessage name="Catatan" />
           )}
           <h2>Arsip</h2>
+          {/* checking archived data */}
           {this.state.data.filter((item) => item.archived).length > 0 ? (
             <div className="notes-list">
               {this.state.data

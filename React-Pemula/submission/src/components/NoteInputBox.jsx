@@ -12,6 +12,7 @@ export const NoteInputBox = ({
       <h2 className="note-input__title">Buat Catatan</h2>
       <p className="note-input__title__char-limit">
         Sisa Karakter :{" "}
+        {/* checking max length (if exceed maxLengthTitile will pop up an alert) */}
         {title.length <= maxLengthTitle
           ? maxLengthTitle - title.length
           : alert("Melewati maksimal karakter")}
