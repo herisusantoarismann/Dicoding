@@ -1,5 +1,6 @@
 import React from "react";
 import { getInitialData, showFormattedDate } from "../utils/index";
+import { NoteInput } from "./NoteInput";
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class NoteApp extends React.Component {
       title: "",
       body: "",
       maxLengthTitle: 50,
+      keyword: [],
     };
 
     this.onChange = this.onChange.bind(this);
@@ -63,63 +65,35 @@ class NoteApp extends React.Component {
     });
   };
 
-  //   onUnArchived = (id) => {
-  //     const newUnArchived = this.state.archived.filter((item) => item.id === id);
-
-  //     this.setState((prevState) => {
-  //       return {
-  //         ...prevState,
-  //         data: [...prevState.data, ...newUnArchived],
-  //         archived: prevState.archived.filter((item) => item.id !== id),
-  //       };
-  //     });
-  //   };
-
   render() {
     return (
       <div>
         <header className="note-app__header">
           <h1>Note App</h1>
           <div>
-            <input type="text" placeholder="Search your note" />
+            <input
+              type="text"
+              name="keyword"
+              value={this.state.keyword}
+              placeholder="Search your note"
+              onChange={this.onChange}
+            />
           </div>
         </header>
         <main className="note-app__body">
-          <div className="note-input">
-            <h2 className="note-input__title">Buat Catatan</h2>
-            <p className="note-input__title__char-limit">
-              Sisa Karakter :{" "}
-              {this.state.maxLengthTitle - this.state.title.length}
-            </p>
-            <form
-              action=""
-              className="note-input__body"
-              onSubmit={this.onSubmit}
-            >
-              <input
-                type="text"
-                placeholder="Masukkan Judul"
-                name="title"
-                value={this.state.title}
-                onChange={this.onChange}
-              />
-              <textarea
-                name="body"
-                value={this.state.body}
-                cols="30"
-                rows="10"
-                placeholder="Masukkan Catatan...."
-                onChange={this.onChange}
-              ></textarea>
-              <button type="submit">Buat</button>
-            </form>
-          </div>
+          <NoteInput
+            onSubmit={this.onSubmit}
+            onChange={this.onChange}
+            {...this.state}
+          />
           <h2>Catatan Aktif</h2>
-
           {this.state.data.filter((item) => !item.archived).length > 0 ? (
             <div className="notes-list">
               {this.state.data
-                .filter((item) => !item.archived)
+                .filter(
+                  (item) =>
+                    !item.archived && item.title.includes(this.state.keyword)
+                )
                 .map((item) => {
                   return (
                     <div className="note-item" key={item.id}>
@@ -157,7 +131,10 @@ class NoteApp extends React.Component {
           {this.state.data.filter((item) => item.archived).length > 0 ? (
             <div className="notes-list">
               {this.state.data
-                .filter((item) => item.archived)
+                .filter(
+                  (item) =>
+                    item.archived && item.title.includes(this.state.keyword)
+                )
                 .map((item) => {
                   return (
                     <div className="note-item" key={item.id}>
