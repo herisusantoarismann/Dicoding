@@ -77,9 +77,10 @@ class NoteApp extends React.Component {
         </header>
         <main className="note-app__body">
           <NoteInput
+            title={this.state.title}
+            body={this.state.body}
             onSubmit={this.onSubmit}
             onChange={this.onChange}
-            {...this.state}
           />
           <h2>Catatan Aktif</h2>
           {this.state.data.filter((item) => !item.archived).length > 0 ? (
@@ -91,9 +92,14 @@ class NoteApp extends React.Component {
                 )
                 .map((item) => (
                   <NoteItem
+                    id={item.id}
+                    title={item.title}
+                    body={item.body}
+                    createdAt={item.createdAt}
+                    archived={item.archived}
                     onDelete={this.onDelete}
                     onArchived={this.onArchived}
-                    {...item}
+                    key={item.id}
                   />
                 ))}
             </div>
@@ -110,9 +116,14 @@ class NoteApp extends React.Component {
                 )
                 .map((item) => (
                   <NoteItem
+                    id={item.id}
+                    title={item.title}
+                    body={item.body}
+                    createdAt={item.createdAt}
+                    archived={item.archived}
                     onDelete={this.onDelete}
                     onArchived={this.onArchived}
-                    {...item}
+                    key={item.id}
                   />
                 ))}
             </div>
