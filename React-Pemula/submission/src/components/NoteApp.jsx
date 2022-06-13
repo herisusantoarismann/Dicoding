@@ -114,88 +114,81 @@ class NoteApp extends React.Component {
               <button type="submit">Buat</button>
             </form>
           </div>
-          {this.state.data.length > 0 ? (
-            <>
-              <h2>Catatan Aktif</h2>
-              <div className="notes-list">
-                {this.state.data.filter((item) => !item.archived).length > 0 ? (
-                  this.state.data
-                    .filter((item) => !item.archived)
-                    .map((item) => {
-                      return (
-                        <div className="note-item" key={item.id}>
-                          <div className="note-item__content">
-                            <h3 className="note-item__title">{item.title}</h3>
-                            <p className="note-item__date">
-                              {showFormattedDate(item.createdAt)}
-                            </p>
-                            <p className="note-item__body">{item.body}</p>
-                          </div>
-                          <div className="note-item__action">
-                            <button
-                              className="note-item__delete-button"
-                              onClick={() => this.onDelete(item.id)}
-                            >
-                              Delete
-                            </button>
-                            <button
-                              className="note-item__archive-button"
-                              onClick={() => this.onArchived(item.id, true)}
-                            >
-                              Arsipkan
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })
-                ) : (
-                  <div className="notes-list__empty-message">
-                    <h3>Tidak ada Catatan</h3>
-                  </div>
-                )}
-              </div>
-              <h2>Arsip</h2>
-              <div className="notes-list">
-                {this.state.data.filter((item) => item.archived).length > 0 ? (
-                  this.state.data
-                    .filter((item) => item.archived)
-                    .map((item) => {
-                      return (
-                        <div className="note-item" key={item.id}>
-                          <div className="note-item__content">
-                            <h3 className="note-item__title">{item.title}</h3>
-                            <p className="note-item__date">
-                              {showFormattedDate(item.createdAt)}
-                            </p>
-                            <p className="note-item__body">{item.body}</p>
-                          </div>
-                          <div className="note-item__action">
-                            <button
-                              className="note-item__delete-button"
-                              onClick={() => this.onDelete(item.id)}
-                            >
-                              Delete
-                            </button>
-                            <button
-                              className="note-item__archive-button"
-                              onClick={() => this.onArchived(item.id, false)}
-                            >
-                              Arsipkan
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })
-                ) : (
-                  <div className="notes-list__empty-message">
-                    <h3>Tidak ada Arsip</h3>
-                  </div>
-                )}
-              </div>
-            </>
+          <h2>Catatan Aktif</h2>
+
+          {this.state.data.filter((item) => !item.archived).length > 0 ? (
+            <div className="notes-list">
+              {this.state.data
+                .filter((item) => !item.archived)
+                .map((item) => {
+                  return (
+                    <div className="note-item" key={item.id}>
+                      <div className="note-item__content">
+                        <h3 className="note-item__title">{item.title}</h3>
+                        <p className="note-item__date">
+                          {showFormattedDate(item.createdAt)}
+                        </p>
+                        <p className="note-item__body">{item.body}</p>
+                      </div>
+                      <div className="note-item__action">
+                        <button
+                          className="note-item__delete-button"
+                          onClick={() => this.onDelete(item.id)}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="note-item__archive-button"
+                          onClick={() => this.onArchived(item.id, true)}
+                        >
+                          Arsipkan
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
           ) : (
             <div className="notes-list__empty-message">
               <h3>Tidak ada Catatan</h3>
+            </div>
+          )}
+          <h2>Arsip</h2>
+          {this.state.data.filter((item) => item.archived).length > 0 ? (
+            <div className="notes-list">
+              {this.state.data
+                .filter((item) => item.archived)
+                .map((item) => {
+                  return (
+                    <div className="note-item" key={item.id}>
+                      <div className="note-item__content">
+                        <h3 className="note-item__title">{item.title}</h3>
+                        <p className="note-item__date">
+                          {showFormattedDate(item.createdAt)}
+                        </p>
+                        <p className="note-item__body">{item.body}</p>
+                      </div>
+                      <div className="note-item__action">
+                        <button
+                          className="note-item__delete-button"
+                          onClick={() => this.onDelete(item.id)}
+                        >
+                          Delete
+                        </button>
+                        <button
+                          className="note-item__archive-button"
+                          onClick={() => this.onArchived(item.id, false)}
+                        >
+                          Arsipkan
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          ) : (
+            <div className="notes-list__empty-message">
+              <h3>Tidak ada Arsip</h3>
             </div>
           )}
         </main>
