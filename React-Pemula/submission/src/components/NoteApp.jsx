@@ -76,6 +76,7 @@ class NoteApp extends React.Component {
           <NoteInputBox
             title={this.state.title}
             body={this.state.body}
+            maxLengthTitle={this.state.maxLengthTitle}
             onSubmit={this.onSubmit}
             onChange={this.onChange}
           />
