@@ -9,10 +9,12 @@ class NoteApp extends React.Component {
       title: "",
       note: "",
       maxLengthTitle: 50,
+      archived: [],
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   onChange = (event) => {
@@ -26,6 +28,15 @@ class NoteApp extends React.Component {
   onSubmit = (event) => {
     event.preventDefault();
     console.log(this.state);
+  };
+
+  onDelete = (id) => {
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        data: prevState.data.filter((item) => item.id !== id),
+      };
+    });
   };
 
   render() {
@@ -67,35 +78,46 @@ class NoteApp extends React.Component {
               <button type="submit">Buat</button>
             </form>
           </div>
-          <div>
-            <h2>Catatan Aktif</h2>
-            <div className="notes-list">
-              {this.state.data.map((item) => {
-                return (
-                  <div className="note-item">
-                    <div className="note-item__content">
-                      <h3 className="note-item__title">{item.title}</h3>
-                      <p className="note-item__date">
-                        {showFormattedDate(item.createdAt)}
-                      </p>
-                      <p className="note-item__body">{item.body}</p>
-                    </div>
-                    <div className="note-item__action">
-                      <button className="note-item__delete-button">
-                        Delete
-                      </button>
-                      <button className="note-item__archive-button">
-                        Arsipkan
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
+          {this.state.data.length > 0 ? (
+            <>
+              <div>
+                <h2>Catatan Aktif</h2>
+                <div className="notes-list">
+                  {this.state.data.map((item) => {
+                    return (
+                      <div className="note-item" key={item.id}>
+                        <div className="note-item__content">
+                          <h3 className="note-item__title">{item.title}</h3>
+                          <p className="note-item__date">
+                            {showFormattedDate(item.createdAt)}
+                          </p>
+                          <p className="note-item__body">{item.body}</p>
+                        </div>
+                        <div className="note-item__action">
+                          <button
+                            className="note-item__delete-button"
+                            onClick={() => this.onDelete(item.id)}
+                          >
+                            Delete
+                          </button>
+                          <button className="note-item__archive-button">
+                            Arsipkan
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div>
+                <h2>Arsip</h2>
+              </div>
+            </>
+          ) : (
+            <div className="notes-list__empty-message">
+              <h3>Tidak ada Catatan</h3>
             </div>
-          </div>
-          <div>
-            <h2>Arsip</h2>
-          </div>
+          )}
         </main>
       </div>
     );
