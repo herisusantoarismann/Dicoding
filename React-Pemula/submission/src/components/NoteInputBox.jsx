@@ -1,6 +1,6 @@
 import React from "react";
 
-export const NoteInput = ({
+export const NoteInputBox = ({
   maxLengthTitle,
   title,
   body,

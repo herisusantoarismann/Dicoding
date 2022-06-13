@@ -2,7 +2,7 @@ import React from "react";
 import { getInitialData } from "../utils/index";
 import { NoteEmptyMessage } from "./NoteEmptyMessage";
 import { NoteHeader } from "./NoteHeader";
-import { NoteInput } from "./NoteInput";
+import { NoteInputBox } from "./NoteInputBox";
 import { NoteItem } from "./NoteItem";
 
 class NoteApp extends React.Component {
@@ -73,7 +73,7 @@ class NoteApp extends React.Component {
       <div>
         <NoteHeader keyword={this.state.keyword} onChange={this.onChange} />
         <main className="note-app__body">
-          <NoteInput
+          <NoteInputBox
             title={this.state.title}
             body={this.state.body}
             onSubmit={this.onSubmit}
