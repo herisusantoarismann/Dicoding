@@ -1,5 +1,5 @@
 import React from "react";
-import { getInitialData } from "../utils/index";
+import { getInitialData, showFormattedDate } from "../utils/index";
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -23,8 +23,14 @@ class NoteApp extends React.Component {
             <h2 className="note-input__title">Buat Catatan</h2>
             <p className="note-input__title__char-limit">Sisa Karakter : 50</p>
             <form action="" className="note-input__body">
-              <input type="text" />
-              <textarea name="" id="" cols="30" rows="10"></textarea>
+              <input type="text" placeholder="Masukkan Judul" />
+              <textarea
+                name=""
+                id=""
+                cols="30"
+                rows="10"
+                placeholder="Masukkan Catatan...."
+              ></textarea>
               <button>Buat</button>
             </form>
           </div>
@@ -36,7 +42,9 @@ class NoteApp extends React.Component {
                   <div className="note-item">
                     <div className="note-item__content">
                       <h3 className="note-item__title">{item.title}</h3>
-                      <p className="note-item__date">{item.createdAt}</p>
+                      <p className="note-item__date">
+                        {showFormattedDate(item.createdAt)}
+                      </p>
                       <p className="note-item__body">{item.body}</p>
                     </div>
                     <div className="note-item__action">
