@@ -6,8 +6,27 @@ class NoteApp extends React.Component {
     super(props);
     this.state = {
       data: getInitialData(),
+      title: "",
+      note: "",
+      maxLengthTitle: 50,
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
+
+  onChange = (event) => {
+    this.setState(() => {
+      return {
+        [event.target.name]: event.target.value,
+      };
+    });
+  };
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state);
+  };
 
   render() {
     return (
@@ -21,17 +40,31 @@ class NoteApp extends React.Component {
         <main className="note-app__body">
           <div className="note-input">
             <h2 className="note-input__title">Buat Catatan</h2>
-            <p className="note-input__title__char-limit">Sisa Karakter : 50</p>
-            <form action="" className="note-input__body">
-              <input type="text" placeholder="Masukkan Judul" />
+            <p className="note-input__title__char-limit">
+              Sisa Karakter :{" "}
+              {this.state.maxLengthTitle - this.state.title.length}
+            </p>
+            <form
+              action=""
+              className="note-input__body"
+              onSubmit={this.onSubmit}
+            >
+              <input
+                type="text"
+                placeholder="Masukkan Judul"
+                name="title"
+                value={this.title}
+                onChange={this.onChange}
+              />
               <textarea
-                name=""
-                id=""
+                name="note"
+                value={this.note}
                 cols="30"
                 rows="10"
                 placeholder="Masukkan Catatan...."
+                onChange={this.onChange}
               ></textarea>
-              <button>Buat</button>
+              <button type="submit">Buat</button>
             </form>
           </div>
           <div>
