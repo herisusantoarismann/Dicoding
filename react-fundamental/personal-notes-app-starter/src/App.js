@@ -16,7 +16,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/archives" element={<ArchivedPage />} />
             <Route path="/notes/new" element={<AddNote />} />
-            <Route path="/notes/:id" element={<DetailPage />} />
+            <Route path="/notes/:idnote" element={<DetailPage />} />
           </Routes>
         </main>
       </div>

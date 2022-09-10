@@ -1,12 +1,18 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { showFormattedDate } from "../utils";
-import { getNote } from "../utils/local-data";
+import { archiveNote, getNote } from "../utils/local-data";
 
 const DetailPage = () => {
-  const { id } = useParams();
-  const notes = getNote(id);
-  const { title, createdAt, body } = notes;
+  const { idnote } = useParams();
+  const notes = getNote(idnote);
+  const { id, title, createdAt, body } = notes;
+  const navigate = useNavigate();
+
+  const onArchived = () => {
+    archiveNote(id);
+    navigate("/");
+  };
 
   return (
     <section className="detail-page">
@@ -14,7 +20,12 @@ const DetailPage = () => {
       <p className="detail-page__createdAt">{showFormattedDate(createdAt)}</p>
       <div className="detail-page__body">{body}</div>
       <div className="detail-page__action">
-        <button className="action" type="button" title="Arsipkan">
+        <button
+          className="action"
+          type="button"
+          title="Arsipkan"
+          onClick={() => onArchived()}
+        >
           <svg
             stroke="currentColor"
             fill="currentColor"
