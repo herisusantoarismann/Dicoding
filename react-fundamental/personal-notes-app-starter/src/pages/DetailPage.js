@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { showFormattedDate } from "../utils";
-import { archiveNote, getNote } from "../utils/local-data";
+import { archiveNote, deleteNote, getNote } from "../utils/local-data";
 
 const DetailPage = () => {
   const { idnote } = useParams();
@@ -11,6 +11,11 @@ const DetailPage = () => {
 
   const onArchived = () => {
     archiveNote(id);
+    navigate("/");
+  };
+
+  const onDelete = () => {
+    deleteNote(id);
     navigate("/");
   };
 
@@ -39,7 +44,12 @@ const DetailPage = () => {
             <path d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM6.24 5h11.52l.81.97H5.44l.8-.97zM5 19V8h14v11H5zm8.45-9h-2.9v3H8l4 4 4-4h-2.55z"></path>
           </svg>
         </button>
-        <button className="action" type="button" title="Hapus">
+        <button
+          className="action"
+          type="button"
+          title="Hapus"
+          onClick={() => onDelete()}
+        >
           <svg
             stroke="currentColor"
             fill="currentColor"
