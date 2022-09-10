@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import AddNote from "./pages/AddNote";
 import ArchivedPage from "./pages/ArchivedPage";
+import DetailPage from "./pages/DetailPage";
 import HomePage from "./pages/HomePage";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/archives" element={<ArchivedPage />} />
             <Route path="/notes/new" element={<AddNote />} />
+            <Route path="/notes/:id" element={<DetailPage />} />
           </Routes>
         </main>
       </div>

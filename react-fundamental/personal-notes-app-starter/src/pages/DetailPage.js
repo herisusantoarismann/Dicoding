@@ -1,16 +1,17 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import { getNote } from "../utils/local-data";
 
-export const DetailPage = () => {
+const DetailPage = () => {
+  const { id } = useParams();
+  const notes = getNote(id);
+  const { title, createdAt, body } = notes;
+
   return (
     <section className="detail-page">
-      <h3 className="detail-page__title">Functional Component</h3>
-      <p className="detail-page__createdAt">Kamis, 14 April 2022</p>
-      <div className="detail-page__body">
-        Functional component merupakan React component yang dibuat menggunakan
-        fungsi JavaScript. Agar fungsi JavaScript dapat disebut component ia
-        harus mengembalikan React element dan dipanggil layaknya React
-        component.
-      </div>
+      <h3 className="detail-page__title">{title}</h3>
+      <p className="detail-page__createdAt">{createdAt}</p>
+      <div className="detail-page__body">{body}</div>
       <div className="detail-page__action">
         <button className="action" type="button" title="Arsipkan">
           <svg
@@ -44,3 +45,5 @@ export const DetailPage = () => {
     </section>
   );
 };
+
+export default DetailPage;
