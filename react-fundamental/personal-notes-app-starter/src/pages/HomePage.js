@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import EmptyNotes from "../components/EmptyNotes";
 import NoteList from "../components/NoteList";
+import SearchBar from "../components/SearchBar";
 import { getActiveNotes } from "../utils/local-data";
 
 const HomePage = () => {
@@ -10,9 +11,7 @@ const HomePage = () => {
   return (
     <section className="homepage">
       <h2>Catatan Aktif</h2>
-      <section className="search-bar">
-        <input type="text" placeholder="Cari berdasarkan judul ..." />
-      </section>
+      <SearchBar />
       {notes.length > 0 ? <NoteList notes={notes} /> : <EmptyNotes />}
       <div className="homepage__action">
         <Link to={"/notes/new"}>
