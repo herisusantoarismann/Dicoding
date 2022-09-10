@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header>
       <h1>
-        <Link to={"/"}>Aplikasi Catatan</Link>
+        <Link to="/">Aplikasi Catatan</Link>
       </h1>
       <nav className="navigation">
         <ul>

@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const NoteItem = ({ data }) => {
-  const { title, createdAt, body } = data;
+  const { id, title, createdAt, body } = data;
   return (
     <article className="note-item">
       <h3 className="note-item__title">
-        <Link href="/notes/notes-1">{title}</Link>
+        <Link to={`/notes/${id}`}>{title}</Link>
       </h3>
       <p className="note-item__createdAt">{showFormattedDate(createdAt)}</p>
       <p className="note-item__body">{body}</p>

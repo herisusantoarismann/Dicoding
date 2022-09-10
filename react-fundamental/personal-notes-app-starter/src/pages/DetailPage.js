@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { showFormattedDate } from "../utils";
 import { getNote } from "../utils/local-data";
 
 const DetailPage = () => {
@@ -10,7 +11,7 @@ const DetailPage = () => {
   return (
     <section className="detail-page">
       <h3 className="detail-page__title">{title}</h3>
-      <p className="detail-page__createdAt">{createdAt}</p>
+      <p className="detail-page__createdAt">{showFormattedDate(createdAt)}</p>
       <div className="detail-page__body">{body}</div>
       <div className="detail-page__action">
         <button className="action" type="button" title="Arsipkan">
