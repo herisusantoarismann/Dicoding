@@ -1,18 +1,33 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import EmptyNotes from "../components/EmptyNotes";
 import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
 import { getActiveNotes } from "../utils/local-data";
 
 const HomePage = () => {
-  const [notes, setNotes] = React.useState(getActiveNotes());
+  const notes = getActiveNotes();
+  const [filteredNotes, setFilteredNotes] = React.useState(getActiveNotes());
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const onChange = (e) => {
+    setFilteredNotes(
+      notes.filter((note) =>
+        note.title.toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    );
+
+    setSearchParams({ title: e.target.value });
+  };
 
   return (
     <section className="homepage">
       <h2>Catatan Aktif</h2>
-      <SearchBar />
-      {notes.length > 0 ? <NoteList notes={notes} /> : <EmptyNotes />}
+      <SearchBar
+        value={searchParams.get("title") ? searchParams.get("title") : ""}
+        onChange={onChange}
+      />
+      {notes.length > 0 ? <NoteList notes={filteredNotes} /> : <EmptyNotes />}
       <div className="homepage__action">
         <Link to={"/notes/new"}>
           <button className="action" type="button" title="Tambah">

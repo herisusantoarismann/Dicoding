@@ -5,6 +5,7 @@ import AddNote from "./pages/AddNote";
 import ArchivedPage from "./pages/ArchivedPage";
 import DetailPage from "./pages/DetailPage";
 import HomePage from "./pages/HomePage";
+import NotFound from "./pages/404";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/archives" element={<ArchivedPage />} />
             <Route path="/notes/new" element={<AddNote />} />
             <Route path="/notes/:idnote" element={<DetailPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </div>
