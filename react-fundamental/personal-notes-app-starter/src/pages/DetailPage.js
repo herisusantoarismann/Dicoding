@@ -40,10 +40,7 @@ const DetailPage = () => {
         <p className="detail-page__createdAt">
           {showFormattedDate(note.createdAt)}
         </p>
-        {/* 2 kali parse karena nilai input memiliki html (mungkin), seperti &lt;p&gt;Ini adalah &lt;strong&gt; dst... */}
-        {/* Maka parser pertama mengubah nilai tadi menjadi string html, seperti <p>Ini adalah <strong>contoh nilai string dst.... */}
-        {/* Dan parser 2 menjadi jsx element */}
-        <div className="detail-page__body">{parse(parse(note.body))}</div>
+        <div className="detail-page__body">{parse(note.body)}</div>
         <div className="detail-page__action">
           {note.archived ? (
             <button

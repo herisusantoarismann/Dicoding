@@ -13,10 +13,7 @@ const NoteItem = ({ data }) => {
         <Link to={`/notes/${id}`}>{title}</Link>
       </h3>
       <p className="note-item__createdAt">{showFormattedDate(createdAt)}</p>
-      {/* 2 kali parse karena nilai input memiliki html (mungkin), seperti &lt;p&gt;Ini adalah &lt;strong&gt; dst... */}
-      {/* Maka parser pertama mengubah nilai tadi menjadi string html, seperti <p>Ini adalah <strong>contoh nilai string dst.... */}
-      {/* Dan parser 2 menjadi jsx element */}
-      <p className="note-item__body">{parse(parse(body))}</p>
+      <p className="note-item__body">{parse(body)}</p>
     </article>
   );
 };
