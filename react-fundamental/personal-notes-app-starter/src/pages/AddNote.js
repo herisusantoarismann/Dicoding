@@ -1,17 +1,16 @@
 import React from "react";
 
-export const AddNote = () => {
+const AddNote = () => {
   return (
     <section className="add-new-page">
       <div className="add-new-page__input">
         <input
           className="add-new-page__input__title"
           placeholder="Catatan rahasia"
-          value=""
         />
         <div
           className="add-new-page__input__body"
-          contenteditable="true"
+          contentEditable="true"
           data-placeholder="Sebenarnya saya adalah ...."
         ></div>
       </div>
@@ -20,7 +19,7 @@ export const AddNote = () => {
           <svg
             stroke="currentColor"
             fill="currentColor"
-            stroke-width="0"
+            strokeWidth="0"
             viewBox="0 0 24 24"
             height="1em"
             width="1em"
@@ -34,3 +33,5 @@ export const AddNote = () => {
     </section>
   );
 };
+
+export default AddNote;
