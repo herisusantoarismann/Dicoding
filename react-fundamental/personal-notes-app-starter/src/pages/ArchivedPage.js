@@ -2,7 +2,6 @@ import React from "react";
 import NoteList from "../components/NoteList";
 import EmptyNotes from "../components/EmptyNotes";
 import { getArchivedNotes } from "../utils/local-data";
-import { FiPlus } from "react-icons/fi";
 import SearchBar from "../components/SearchBar";
 import { useSearchParams } from "react-router-dom";
 
@@ -29,11 +28,6 @@ const ArchivedPage = () => {
         onChange={onChange}
       />
       {notes.length > 0 ? <NoteList notes={filteredNotes} /> : <EmptyNotes />}
-      <div className="homepage__action">
-        <button className="action" type="button" title="Tambah">
-          <FiPlus />
-        </button>
-      </div>
     </section>
   );
 };
