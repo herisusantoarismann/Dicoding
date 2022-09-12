@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { LanguageContext } from "../context/LanguageContext";
 import { useInput } from "../hooks/useInput";
+import { content } from "../utils/content";
 
 const RegisterPage = () => {
+  const { language } = React.useContext(LanguageContext);
   const [name, handleNameChange] = useInput("");
   const [email, handleEmailChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");
@@ -14,7 +17,7 @@ const RegisterPage = () => {
 
   return (
     <section className="regsiter-page">
-      <h2>Isi form untuk mendaftar akun.</h2>
+      <h2>{content[language].register.description}</h2>
       <div className="input-register">
         <label htmlFor="name">Name</label>
         <input type="text" id="name" value={name} onChange={handleNameChange} />
@@ -44,7 +47,8 @@ const RegisterPage = () => {
         </button>
       </div>
       <p>
-        Sudah punya akun? <Link to="/">Login di sini</Link>
+        {content[language].register.check}{" "}
+        <Link to="/">{content[language].register.anchor}</Link>
       </p>
     </section>
   );

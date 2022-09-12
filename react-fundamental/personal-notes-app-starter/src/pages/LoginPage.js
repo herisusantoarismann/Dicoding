@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { LanguageContext } from "../context/LanguageContext";
 import { useInput } from "../hooks/useInput";
+import { content } from "../utils/content";
 
 const LoginPage = () => {
+  const { language } = React.useContext(LanguageContext);
   const [email, handleEmailChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");
 
@@ -12,7 +15,7 @@ const LoginPage = () => {
 
   return (
     <section className="login-page">
-      <h2>Yuk, login untuk menggunakan aplikasi.</h2>
+      <h2>{content[language].login.description}</h2>
       <div className="input-login">
         <label htmlFor="email">Email</label>
         <input
@@ -33,7 +36,8 @@ const LoginPage = () => {
         </button>
       </div>
       <p>
-        Belum punya akun? <Link to="/register">Daftar di sini</Link>
+        {content[language].login.check}{" "}
+        <Link to="/register">{content[language].login.anchor}</Link>
       </p>
     </section>
   );
