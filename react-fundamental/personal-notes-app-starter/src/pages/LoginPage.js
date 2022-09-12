@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useInput } from "../hooks/useInput";
 
-const LoginInput = () => {
+const LoginPage = () => {
   const [email, handleEmailChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");
 
@@ -39,4 +39,4 @@ const LoginInput = () => {
   );
 };
 
-export default LoginInput;
+export default LoginPage;

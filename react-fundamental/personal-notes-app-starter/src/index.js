@@ -1,6 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
+import AuthContextProvider from "./context/AuthContext";
 import ThemeContextProvider from "./context/ThemeContext";
 
 import "./styles/style.css";
@@ -8,6 +9,8 @@ import "./styles/style.css";
 const root = createRoot(document.getElementById("root"));
 root.render(
   <ThemeContextProvider>
-    <App />
+    <AuthContextProvider>
+      <App />
+    </AuthContextProvider>
   </ThemeContextProvider>
 );

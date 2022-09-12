@@ -2,7 +2,6 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
 import EmptyNotes from "../components/EmptyNotes";
-import LoginInput from "../components/LoginInput";
 import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
 import { getActiveNotes } from "../utils/local-data";
@@ -23,22 +22,21 @@ const HomePage = () => {
   };
 
   return (
-    <LoginInput />
-    // <section className="homepage">
-    //   <h2>Catatan Aktif</h2>
-    //   <SearchBar
-    //     value={searchParams.get("title") ? searchParams.get("title") : ""}
-    //     onChange={onChange}
-    //   />
-    //   {notes.length > 0 ? <NoteList notes={filteredNotes} /> : <EmptyNotes />}
-    //   <div className="homepage__action">
-    //     <Link to={"/notes/new"}>
-    //       <button className="action" type="button" title="Tambah">
-    //         <FiPlus />
-    //       </button>
-    //     </Link>
-    //   </div>
-    // </section>
+    <section className="homepage">
+      <h2>Catatan Aktif</h2>
+      <SearchBar
+        value={searchParams.get("title") ? searchParams.get("title") : ""}
+        onChange={onChange}
+      />
+      {notes.length > 0 ? <NoteList notes={filteredNotes} /> : <EmptyNotes />}
+      <div className="homepage__action">
+        <Link to={"/notes/new"}>
+          <button className="action" type="button" title="Tambah">
+            <FiPlus />
+          </button>
+        </Link>
+      </div>
+    </section>
   );
 };
 

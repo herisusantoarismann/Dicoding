@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export const ThemeContext = React.createContext();
 
@@ -25,6 +26,10 @@ const ThemeContextProvider = ({ children }) => {
       {children}
     </ThemeContext.Provider>
   );
+};
+
+ThemeContextProvider.propTypes = {
+  children: PropTypes.element,
 };
 
 export default ThemeContextProvider;

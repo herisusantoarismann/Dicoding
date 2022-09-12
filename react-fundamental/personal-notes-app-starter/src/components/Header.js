@@ -7,8 +7,6 @@ import { ThemeContext } from "../context/ThemeContext";
 const Header = () => {
   const theme = React.useContext(ThemeContext);
 
-  console.log(theme);
-
   return (
     <header>
       <h1>
