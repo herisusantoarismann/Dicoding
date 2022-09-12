@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { SiGoogletranslate } from "react-icons/si";
+import { FiSun, FiLogOut } from "react-icons/fi";
 
 const Header = () => {
   return (
@@ -7,13 +9,23 @@ const Header = () => {
       <h1>
         <Link to="/">Aplikasi Catatan</Link>
       </h1>
-      <nav className="navigation">
+      <nav class="navigation">
         <ul>
           <li>
-            <Link to="/archives">Arsip</Link>
+            <Link to="/archives">Terarsip</Link>
           </li>
         </ul>
       </nav>
+      <button class="toggle-locale" type="button">
+        <SiGoogletranslate />
+      </button>
+      <button class="toggle-theme" type="button">
+        <FiSun />
+      </button>
+      <button class="button-logout" type="button">
+        <FiLogOut />
+        ini
+      </button>
     </header>
   );
 };
