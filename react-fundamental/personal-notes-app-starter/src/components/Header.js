@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { SiGoogletranslate } from "react-icons/si";
 import { FiSun, FiLogOut, FiMoon } from "react-icons/fi";
 import { ThemeContext } from "../context/ThemeContext";
+import { AuthContext } from "../context/AuthContext";
 
 const Header = () => {
-  const theme = React.useContext(ThemeContext);
+  const { theme, toggleTheme } = React.useContext(ThemeContext);
+  const authed = React.useContext(AuthContext);
 
   return (
     <header>
@@ -22,17 +24,14 @@ const Header = () => {
       <button className="toggle-locale" type="button">
         <SiGoogletranslate />
       </button>
-      <button
-        className="toggle-theme"
-        type="button"
-        onClick={theme.toggleTheme}
-      >
+      <button className="toggle-theme" type="button" onClick={toggleTheme}>
         {theme === "light" ? <FiMoon /> : <FiSun />}
       </button>
-      <button className="button-logout" type="button">
-        <FiLogOut />
-        ini
-      </button>
+      {authed.authed && (
+        <button className="button-logout" type="button">
+          <FiLogOut /> {authed.name}
+        </button>
+      )}
     </header>
   );
 };
