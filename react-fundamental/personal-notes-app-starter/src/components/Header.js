@@ -1,9 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { SiGoogletranslate } from "react-icons/si";
-import { FiSun, FiLogOut } from "react-icons/fi";
+import { FiSun, FiLogOut, FiMoon } from "react-icons/fi";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Header = () => {
+  const theme = React.useContext(ThemeContext);
+
+  console.log(theme);
+
   return (
     <header>
       <h1>
@@ -19,8 +24,12 @@ const Header = () => {
       <button className="toggle-locale" type="button">
         <SiGoogletranslate />
       </button>
-      <button className="toggle-theme" type="button">
-        <FiSun />
+      <button
+        className="toggle-theme"
+        type="button"
+        onClick={theme.toggleTheme}
+      >
+        {theme === "light" ? <FiMoon /> : <FiSun />}
       </button>
       <button className="button-logout" type="button">
         <FiLogOut />
