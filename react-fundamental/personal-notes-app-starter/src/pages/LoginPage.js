@@ -1,16 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import { LanguageContext } from "../context/LanguageContext";
 import { useInput } from "../hooks/useInput";
+import { getUserLogged, login, putAccessToken } from "../utils/api";
 import { content } from "../utils/content";
 
 const LoginPage = () => {
   const { language } = React.useContext(LanguageContext);
+  const { setAuthUser } = React.useContext(AuthContext);
+  const navigate = useNavigate();
   const [email, handleEmailChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");
 
   const onSubmit = () => {
-    console.log(email, password);
+    const credentials = { email: email, password: password };
+    login(credentials).then((res) => {
+      if (!res.error) {
+        putAccessToken(res.data.accessToken);
+        getUserLogged().then((res) => {
+          if (!res.error) {
+            setAuthUser(res.data);
+          }
+        });
+      }
+    });
   };
 
   return (

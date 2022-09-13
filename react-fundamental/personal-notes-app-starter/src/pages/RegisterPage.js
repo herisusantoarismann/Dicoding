@@ -1,18 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LanguageContext } from "../context/LanguageContext";
 import { useInput } from "../hooks/useInput";
+import { register } from "../utils/api";
 import { content } from "../utils/content";
 
 const RegisterPage = () => {
   const { language } = React.useContext(LanguageContext);
+  const navigate = useNavigate();
   const [name, handleNameChange] = useInput("");
   const [email, handleEmailChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");
   const [passwordConfirmation, handlePasswordConfirmationChange] = useInput("");
 
   const onSubmit = () => {
-    console.log(name, email, password, passwordConfirmation);
+    if (password !== passwordConfirmation)
+      return alert("Password tidak cocok.");
+
+    const credentials = {
+      name: name,
+      email: email,
+      password: password,
+    };
+    register(credentials).then((res) => {
+      if (!res.error) navigate("/");
+    });
   };
 
   return (

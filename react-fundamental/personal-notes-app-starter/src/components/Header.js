@@ -9,7 +9,7 @@ import { content } from "../utils/content";
 
 const Header = () => {
   const { theme, toggleTheme } = React.useContext(ThemeContext);
-  const { authed } = React.useContext(AuthContext);
+  const { authUser, Logout } = React.useContext(AuthContext);
   const { language, toggleLanguage } = React.useContext(LanguageContext);
 
   return (
@@ -20,7 +20,7 @@ const Header = () => {
       <nav className="navigation">
         <ul>
           <li>
-            {authed && (
+            {authUser && (
               <Link to="/archives">{content[language].header.anchor}</Link>
             )}
           </li>
@@ -32,9 +32,9 @@ const Header = () => {
       <button className="toggle-theme" type="button" onClick={toggleTheme}>
         {theme === "light" ? <FiMoon /> : <FiSun />}
       </button>
-      {authed && (
-        <button className="button-logout" type="button">
-          <FiLogOut /> {authed.name}
+      {authUser && (
+        <button className="button-logout" type="button" onClick={Logout}>
+          <FiLogOut /> {authUser.name}
         </button>
       )}
     </header>
