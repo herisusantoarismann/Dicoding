@@ -4,6 +4,15 @@ export const content = {
       name: "Notes App",
       anchor: "Archived",
     },
+    search: {
+      placeholder: "Search by title...",
+    },
+    home: {
+      title: "Active Note",
+    },
+    archive: {
+      title: "Archived Note",
+    },
     login: {
       description: "Login to use app, please.",
       check: "Don't have an account?",
@@ -19,6 +28,15 @@ export const content = {
     header: {
       name: "Aplikasi Catatan",
       anchor: "Terarsip",
+    },
+    search: {
+      placeholder: "Cari berdasarkan judul...",
+    },
+    home: {
+      title: "Catatan Aktif",
+    },
+    archive: {
+      title: "Catatan Arsip",
     },
     login: {
       description: "Yuk, login untuk menggunakan aplikasi.",

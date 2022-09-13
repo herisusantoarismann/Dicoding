@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export const ThemeContext = React.createContext();
 
 const ThemeContextProvider = ({ children }) => {
-  const [theme, setTheme] = React.useState("light");
+  const [theme, setTheme] = React.useState("dark");
 
   const toggleTheme = () => {
     setTheme((prevState) => (prevState === "light" ? "dark" : "light"));
