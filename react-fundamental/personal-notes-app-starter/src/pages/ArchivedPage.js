@@ -7,9 +7,14 @@ import { useSearchParams } from "react-router-dom";
 import { useNotes } from "../hooks/useNotes";
 
 const ArchivedPage = () => {
-  const [notes, filteredNotes, setFilteredNotes, loading] =
-    useNotes("archived");
+  const [notes, loading] = useNotes("archived");
+  const [filteredNotes, setFilteredNotes] = React.useState(notes);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  // karena pertama kali nilai notes array kosong
+  React.useEffect(() => {
+    setFilteredNotes(notes);
+  }, [notes]);
 
   const onChange = (e) => {
     setFilteredNotes(
