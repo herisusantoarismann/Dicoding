@@ -1,7 +1,7 @@
 import React from "react";
 import { getActiveNotes, getArchivedNotes } from "../utils/api";
 
-export const useNotes = (type) => {
+export const useNotes = (type = "active") => {
   const [notes, setNotes] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
