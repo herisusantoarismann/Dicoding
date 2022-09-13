@@ -1,35 +1,39 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { showFormattedDate } from "../utils";
-import {
-  archiveNote,
-  deleteNote,
-  getNote,
-  unarchiveNote,
-} from "../utils/local-data";
 import { BiArchiveIn, BiArchiveOut } from "react-icons/bi";
 import { FiTrash } from "react-icons/fi";
 import parse from "html-react-parser";
 import NotFound from "./404";
+import { archiveNote, deleteNote, getNote, unarchiveNote } from "../utils/api";
 
 const DetailPage = () => {
   const { idnote } = useParams();
-  const note = getNote(idnote);
+  const [note, setNote] = React.useState(undefined);
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    getNote(idnote).then((res) => {
+      if (!res.error) setNote(res.data);
+    });
+  }, []);
+
   const onArchived = () => {
-    archiveNote(note.id);
-    navigate("/");
+    archiveNote(note.id).then((res) => {
+      if (!res.error) navigate("/");
+    });
   };
 
   const onUnarchived = () => {
-    unarchiveNote(note.id);
-    navigate("/");
+    unarchiveNote(note.id).then((res) => {
+      if (!res.error) navigate("/archives");
+    });
   };
 
   const onDelete = () => {
-    deleteNote(note.id);
-    navigate("/");
+    deleteNote(note.id).then((res) => {
+      if (!res.error) navigate("/");
+    });
   };
 
   if (note === undefined) return <NotFound />;
@@ -40,7 +44,9 @@ const DetailPage = () => {
         <p className="detail-page__createdAt">
           {showFormattedDate(note.createdAt)}
         </p>
-        <div className="detail-page__body">{parse(note.body)}</div>
+        <div className="detail-page__body">
+          {note.body !== undefined ? parse(note.body) : note.body}
+        </div>
         <div className="detail-page__action">
           {note.archived ? (
             <button

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { addNote } from "../utils/local-data";
 import { FiCheck } from "react-icons/fi";
+import { addNote } from "../utils/api";
 
 const AddNote = () => {
   const [note, setNote] = React.useState({
@@ -25,7 +25,9 @@ const AddNote = () => {
   };
 
   const onSubmit = () => {
-    addNote(note);
+    addNote(note).then((res) => {
+      console.log(res);
+    });
     navigate("/");
   };
 

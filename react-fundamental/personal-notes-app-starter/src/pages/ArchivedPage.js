@@ -1,14 +1,23 @@
 import React from "react";
 import NoteList from "../components/NoteList";
 import EmptyNotes from "../components/EmptyNotes";
-import { getArchivedNotes } from "../utils/local-data";
 import SearchBar from "../components/SearchBar";
 import { useSearchParams } from "react-router-dom";
+import { getArchivedNotes } from "../utils/api";
 
 const ArchivedPage = () => {
-  const notes = getArchivedNotes();
-  const [filteredNotes, setFilteredNotes] = React.useState(getArchivedNotes());
+  const [notes, setNotes] = React.useState([]);
+  const [filteredNotes, setFilteredNotes] = React.useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  React.useEffect(() => {
+    getArchivedNotes().then((res) => {
+      if (!res.error) {
+        setNotes(res.data);
+        setFilteredNotes(res.data);
+      }
+    });
+  }, []);
 
   const onChange = (e) => {
     setFilteredNotes(

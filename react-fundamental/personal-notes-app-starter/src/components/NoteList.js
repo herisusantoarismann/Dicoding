@@ -6,7 +6,15 @@ const NoteList = ({ notes }) => {
   return (
     <section className="notes-list">
       {notes.map((note, i) => {
-        return <NoteItem data={note} key={i} />;
+        return (
+          <NoteItem
+            id={note.id}
+            title={note.title}
+            createdAt={note.createdAt}
+            body={note.body}
+            key={i}
+          />
+        );
       })}
     </section>
   );

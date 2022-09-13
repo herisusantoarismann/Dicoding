@@ -4,9 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import parse from "html-react-parser";
 
-const NoteItem = ({ data }) => {
-  const { id, title, createdAt, body } = data;
-
+const NoteItem = ({ id, title, createdAt, body }) => {
   return (
     <article className="note-item">
       <h3 className="note-item__title">
@@ -19,7 +17,10 @@ const NoteItem = ({ data }) => {
 };
 
 NoteItem.propTypes = {
-  data: PropTypes.object.isRequired,
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
 };
 
 export default NoteItem;

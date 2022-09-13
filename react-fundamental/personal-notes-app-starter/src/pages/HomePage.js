@@ -4,12 +4,21 @@ import { Link, useSearchParams } from "react-router-dom";
 import EmptyNotes from "../components/EmptyNotes";
 import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
-import { getActiveNotes } from "../utils/local-data";
+import { getActiveNotes } from "../utils/api";
 
 const HomePage = () => {
-  const notes = getActiveNotes();
-  const [filteredNotes, setFilteredNotes] = React.useState(getActiveNotes());
+  const [notes, setNotes] = React.useState([]);
+  const [filteredNotes, setFilteredNotes] = React.useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  React.useEffect(() => {
+    getActiveNotes().then((res) => {
+      if (!res.error) {
+        setNotes(res.data);
+        setFilteredNotes(res.data);
+      }
+    });
+  }, []);
 
   const onChange = (e) => {
     setFilteredNotes(

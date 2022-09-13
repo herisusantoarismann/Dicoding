@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { LanguageContext } from "../context/LanguageContext";
 import { useInput } from "../hooks/useInput";
@@ -9,7 +9,6 @@ import { content } from "../utils/content";
 const LoginPage = () => {
   const { language } = React.useContext(LanguageContext);
   const { setAuthUser } = React.useContext(AuthContext);
-  const navigate = useNavigate();
   const [email, handleEmailChange] = useInput("");
   const [password, handlePasswordChange] = useInput("");
 

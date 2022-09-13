@@ -7,7 +7,6 @@ import DetailPage from "./pages/DetailPage";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/404";
 import RegisterPage from "./pages/RegisterPage";
-import { AuthContext } from "./context/AuthContext";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
 function App() {

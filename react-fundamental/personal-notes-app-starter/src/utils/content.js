@@ -18,7 +18,7 @@ export const content = {
   id: {
     header: {
       name: "Aplikasi Catatan",
-      anchor: "Arsip",
+      anchor: "Terarsip",
     },
     login: {
       description: "Yuk, login untuk menggunakan aplikasi.",

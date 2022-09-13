@@ -1,11 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  getAccessToken,
-  getUserLogged,
-  login,
-  putAccessToken,
-} from "../utils/api";
 
 export const AuthContext = React.createContext();
 
