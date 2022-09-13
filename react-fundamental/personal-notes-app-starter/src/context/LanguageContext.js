@@ -7,8 +7,15 @@ const LanguageContextProvider = ({ children }) => {
   const [language, setLanguage] = React.useState("id");
 
   const toggleLanguage = () => {
+    localStorage.setItem("locale", language === "id" ? "en" : "id");
     setLanguage((prevState) => (prevState === "id" ? "en" : "id"));
   };
+
+  React.useEffect(() => {
+    if (localStorage.getItem("locale")) {
+      setLanguage(localStorage.getItem("locale"));
+    }
+  }, []);
 
   const LanguageContextValue = React.useMemo(() => {
     return {

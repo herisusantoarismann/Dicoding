@@ -7,12 +7,19 @@ const ThemeContextProvider = ({ children }) => {
   const [theme, setTheme] = React.useState("dark");
 
   const toggleTheme = () => {
+    localStorage.setItem("theme", theme === "light" ? "dark" : "light");
     setTheme((prevState) => (prevState === "light" ? "dark" : "light"));
   };
 
   React.useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  React.useEffect(() => {
+    if (localStorage.getItem("theme")) {
+      setTheme(localStorage.getItem("theme"));
+    }
+  }, []);
 
   const ThemeContextValue = React.useMemo(() => {
     return {
