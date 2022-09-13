@@ -12,6 +12,7 @@ const HomePage = () => {
   const [filteredNotes, setFilteredNotes] = React.useState(notes);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // karena pertama kali nilai notes array kosong
   React.useEffect(() => {
     setFilteredNotes(notes);
   }, [notes]);
