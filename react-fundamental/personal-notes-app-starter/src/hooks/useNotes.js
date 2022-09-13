@@ -3,7 +3,6 @@ import { getActiveNotes, getArchivedNotes } from "../utils/api";
 
 export const useNotes = (type) => {
   const [notes, setNotes] = React.useState([]);
-  const [filteredNotes, setFilteredNotes] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
@@ -11,7 +10,6 @@ export const useNotes = (type) => {
       getActiveNotes().then((res) => {
         if (!res.error) {
           setNotes(res.data);
-          setFilteredNotes(res.data);
           setLoading(false);
         }
       });
@@ -19,7 +17,6 @@ export const useNotes = (type) => {
       getArchivedNotes().then((res) => {
         if (!res.error) {
           setNotes(res.data);
-          setFilteredNotes(res.data);
           setLoading(false);
         }
       });
@@ -28,5 +25,5 @@ export const useNotes = (type) => {
     }
   }, []);
 
-  return [notes, filteredNotes, setFilteredNotes, loading];
+  return [notes, loading];
 };

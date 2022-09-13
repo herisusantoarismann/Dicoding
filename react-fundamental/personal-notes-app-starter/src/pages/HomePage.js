@@ -8,8 +8,13 @@ import SearchBar from "../components/SearchBar";
 import { useNotes } from "../hooks/useNotes";
 
 const HomePage = () => {
-  const [notes, filteredNotes, setFilteredNotes, loading] = useNotes("active");
+  const [notes, loading] = useNotes("active");
+  const [filteredNotes, setFilteredNotes] = React.useState(notes);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  React.useEffect(() => {
+    setFilteredNotes(notes);
+  }, [notes]);
 
   const onChange = (e) => {
     setFilteredNotes(
