@@ -2,23 +2,14 @@ import React from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link, useSearchParams } from "react-router-dom";
 import EmptyNotes from "../components/EmptyNotes";
+import Loading from "../components/Loading";
 import NoteList from "../components/NoteList";
 import SearchBar from "../components/SearchBar";
-import { getActiveNotes } from "../utils/api";
+import { useNotes } from "../hooks/useNotes";
 
 const HomePage = () => {
-  const [notes, setNotes] = React.useState([]);
-  const [filteredNotes, setFilteredNotes] = React.useState([]);
+  const [notes, filteredNotes, setFilteredNotes, loading] = useNotes("active");
   const [searchParams, setSearchParams] = useSearchParams();
-
-  React.useEffect(() => {
-    getActiveNotes().then((res) => {
-      if (!res.error) {
-        setNotes(res.data);
-        setFilteredNotes(res.data);
-      }
-    });
-  }, []);
 
   const onChange = (e) => {
     setFilteredNotes(
@@ -37,7 +28,13 @@ const HomePage = () => {
         value={searchParams.get("title") ? searchParams.get("title") : ""}
         onChange={onChange}
       />
-      {notes.length > 0 ? <NoteList notes={filteredNotes} /> : <EmptyNotes />}
+      {loading ? (
+        <Loading />
+      ) : notes.length > 0 ? (
+        <NoteList notes={filteredNotes} />
+      ) : (
+        <EmptyNotes />
+      )}
       <div className="homepage__action">
         <Link to={"/notes/new"}>
           <button className="action" type="button" title="Tambah">

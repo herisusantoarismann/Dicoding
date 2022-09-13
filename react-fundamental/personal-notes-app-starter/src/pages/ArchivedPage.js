@@ -2,22 +2,14 @@ import React from "react";
 import NoteList from "../components/NoteList";
 import EmptyNotes from "../components/EmptyNotes";
 import SearchBar from "../components/SearchBar";
+import Loading from "../components/Loading";
 import { useSearchParams } from "react-router-dom";
-import { getArchivedNotes } from "../utils/api";
+import { useNotes } from "../hooks/useNotes";
 
 const ArchivedPage = () => {
-  const [notes, setNotes] = React.useState([]);
-  const [filteredNotes, setFilteredNotes] = React.useState([]);
+  const [notes, filteredNotes, setFilteredNotes, loading] =
+    useNotes("archived");
   const [searchParams, setSearchParams] = useSearchParams();
-
-  React.useEffect(() => {
-    getArchivedNotes().then((res) => {
-      if (!res.error) {
-        setNotes(res.data);
-        setFilteredNotes(res.data);
-      }
-    });
-  }, []);
 
   const onChange = (e) => {
     setFilteredNotes(
@@ -36,7 +28,13 @@ const ArchivedPage = () => {
         value={searchParams.get("title") ? searchParams.get("title") : ""}
         onChange={onChange}
       />
-      {notes.length > 0 ? <NoteList notes={filteredNotes} /> : <EmptyNotes />}
+      {loading ? (
+        <Loading />
+      ) : notes.length > 0 ? (
+        <NoteList notes={filteredNotes} />
+      ) : (
+        <EmptyNotes />
+      )}
     </section>
   );
 };
